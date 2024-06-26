@@ -21,7 +21,7 @@ public class MainApp {
         Integer maxThird = listInt.stream()
                 .sorted(Comparator.reverseOrder())
                 .skip(2)
-                .limit(1)
+               // .limit(1)
                 .findFirst()
                 .orElse(0);
         System.out.println(maxThird);
@@ -31,7 +31,7 @@ public class MainApp {
                 .distinct()
                 .sorted(Comparator.reverseOrder())
                 .skip(2)
-                .limit(1)
+            //    .limit(1)
                 .findFirst()
                 .orElse(0);
         System.out.println(maxThirdUnic);
@@ -84,7 +84,7 @@ public class MainApp {
         // Имеется массив строк, в каждой из которых лежит набор из 5 строк, разделенных пробелом, найдите среди всех слов самое длинное, если таких слов несколько, получите любое из них
         String[] stringArrWithFiveWords = {"five words in each string", "there is five string too", "some other set of words", "one two three four five"};
         String longestArrWord1 = Arrays.stream(stringArrWithFiveWords)
-                .toList().stream()
+               // .toList()//.stream()
                 .flatMap(wrd -> Stream.of(wrd.split(" ")))
                 .max(Comparator.comparingInt(String::length))
                 .orElse(null);
