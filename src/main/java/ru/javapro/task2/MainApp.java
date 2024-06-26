@@ -22,7 +22,8 @@ public class MainApp {
                 .sorted(Comparator.reverseOrder())
                 .skip(2)
                 .limit(1)
-                .mapToInt(x -> x).sum();
+                .findFirst()
+                .orElse(0);
         System.out.println(maxThird);
 
         // Найдите в списке целых чисел 3-е наибольшее «уникальное» число (пример: 5 2 10 9 4 3 10 1 13 => 9, в отличие от прошлой задачи здесь разные 10 считает за одно число)
@@ -31,7 +32,8 @@ public class MainApp {
                 .sorted(Comparator.reverseOrder())
                 .skip(2)
                 .limit(1)
-                .mapToInt(x -> x).sum();
+                .findFirst()
+                .orElse(0);
         System.out.println(maxThirdUnic);
 
         // Имеется список объектов типа Сотрудник (имя, возраст, должность), необходимо получить список имен 3 самых старших сотрудников с должностью «Инженер», в порядке убывания возраста
@@ -61,13 +63,15 @@ public class MainApp {
 
         // Найдите в списке слов самое длинное
         List<String> words = Arrays.asList("123456", "12", "1234", "123", "12345", "12");
-        String longestWord = words.stream().max(Comparator.comparingInt(String::length)).get();
+        String longestWord = words.stream()
+                .max(Comparator.comparingInt(String::length))
+                .orElse(null);
         System.out.println(longestWord);
 
         // Имеется строка с набором слов в нижнем регистре, разделенных пробелом. Постройте хеш-мапы, в которой будут хранится пары: слово - сколько раз оно встречается во входной строке
         String str = "cat dog hamster parrot parrot dog dog cat";
         Map<String, Long> map = Arrays.asList(str.split(" ")).stream()
-                .collect(Collectors.groupingBy(list -> (String) list, Collectors.counting()));
+                .collect(Collectors.groupingBy(s -> (String) s, Collectors.counting()));
         System.out.println(map);
 
         // Отпечатайте в консоль строки из списка в порядке увеличения длины слова, если слова имеют одинаковую длины, то должен быть сохранен алфавитный порядок
@@ -82,8 +86,8 @@ public class MainApp {
         String longestArrWord1 = Arrays.stream(stringArrWithFiveWords)
                 .toList().stream()
                 .flatMap(wrd -> Stream.of(wrd.split(" ")))
-                .collect(Collectors.toList()).stream()
-                .max(Comparator.comparingInt(String::length)).get();
+                .max(Comparator.comparingInt(String::length))
+                .orElse(null);
         System.out.println(longestArrWord1);
     }
 }
